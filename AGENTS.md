@@ -94,4 +94,13 @@ and obtain approval before flashing; detection alone is not consent.
 
 Create commits and push only when the user requests them or the active workflow explicitly requires them. Ordinary feature, application, and documentation pull requests must not edit `docs/CHANGELOG.md` or `docs/CHANGELOG.zh_CN.md`; describe user-visible behavior, compatibility, and release-flow impact in the pull-request body and authoritative documentation instead. During release preparation, the release maintainer aggregates merged user-visible changes into both changelog files before creating the tag.
 
+## Owner workflow: direct-to-main
+
+The owner of this fork requires the following workflow for every change, and it overrides the pull-request flow above:
+
+1. Update the repository-root `README.md` whenever behavior, features, or usage changes.
+2. Commit the change and push it directly to the `main` branch of the `origin` remote.
+3. Do not open a pull request unless the owner explicitly asks for one.
+4. Never force-push `main`, and never commit credentials, generated firmware under `build/`, or local agent memory under `.ai-memory/`.
+
 Community guidance is in `.github/CONTRIBUTING.md`, `.github/CODE_OF_CONDUCT.md`, `.github/SECURITY.md`, and `.github/SUPPORT.md`.

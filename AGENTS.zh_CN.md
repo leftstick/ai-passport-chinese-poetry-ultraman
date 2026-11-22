@@ -88,4 +88,13 @@ Unverified: 仍需板卡、仪器或用户确认的事项
 
 仅在用户请求或当前工作流明确要求时创建 commit 和 push。普通功能、应用和文档 PR 不得修改 `docs/CHANGELOG.md` 或 `docs/CHANGELOG.zh_CN.md`；用户可见行为、兼容性和发布流程影响改为写入 PR 正文及对应权威文档。发布准备期间，由发布负责人在创建 tag 前把已合并的用户可见变化统一汇总到两份变更日志。
 
+## 仓库所有者规则：直接提交 main
+
+本 fork 的所有者要求每次修改都遵循以下流程，该规则覆盖上文的 PR 流程：
+
+1. 行为、功能或用法发生变化时，同步更新仓库根目录的 `README.md`。
+2. 完成后直接提交，并推送到 `origin` 远端的 `main` 分支。
+3. 除所有者明确要求外，不创建 PR。
+4. 禁止 force-push `main`；禁止提交凭证、`build/` 下的生成固件，以及 `.ai-memory/` 中的本地工作记忆。
+
 社区规范见 `.github/CONTRIBUTING.zh_CN.md`、`.github/CODE_OF_CONDUCT.zh_CN.md`、`.github/SECURITY.zh_CN.md` 与 `.github/SUPPORT.zh_CN.md`。
