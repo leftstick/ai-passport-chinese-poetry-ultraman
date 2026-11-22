@@ -1,11 +1,11 @@
-// main/main.c —— 算术超能战启动入口。
+// main/main.c —— 奥特曼诗词收集冒险启动入口。
 //
 // 按键语义:
-//   首页:上/下切换英雄,长按确定切换难度,确定进入关卡
-//   关卡:上/下选关,确定出击,长按确定返回
-//   战斗:上/下选答案,确定作答;长按上必杀,长按下提示,长按确定暂停
-//   浮层:上/下选择,确定执行,长按确定继续/默认项
-#include "battle_app.h"
+//   首页:上/下选择菜单,确定进入
+//   地图:上/下选关,确定进入,长按返回首页
+//   闯关:上/下选字块或选项,确定作答,长按返回地图
+//   图鉴:上/下选诗篇,确定阅读/重听,长按返回
+#include "adventure_app.h"
 #include "bsp_battery.h"
 #include "bsp_button.h"
 #include "bsp_display.h"
@@ -59,7 +59,7 @@ static void input_task(void *arg)
     input_event_t input;
     for (;;) {
         if (xQueueReceive(s_input_queue, &input, portMAX_DELAY) == pdTRUE) {
-            battle_app_handle_key(input.btn, input.event);
+            adventure_app_handle_key(input.btn, input.event);
         }
     }
 }
@@ -79,7 +79,7 @@ static esp_err_t nvs_init(void)
 
 void app_main(void)
 {
-    ESP_LOGI(TAG, "算术超能战启动");
+    ESP_LOGI(TAG, "奥特曼诗词收集冒险启动");
 
     const uint32_t wake_causes = esp_sleep_get_wakeup_causes();
     if (wake_causes & (1u << ESP_SLEEP_WAKEUP_GPIO)) {
@@ -113,7 +113,7 @@ void app_main(void)
         ESP_LOGE(TAG, "输入队列创建失败");
         return;
     }
-    if (xTaskCreate(input_task, "battle_input", 4096, NULL, 5, NULL) != pdPASS) {
+    if (xTaskCreate(input_task, "adv_input", 4096, NULL, 5, NULL) != pdPASS) {
         ESP_LOGE(TAG, "输入任务创建失败");
         return;
     }
@@ -131,7 +131,7 @@ void app_main(void)
         }
     }
 
-    const esp_err_t app_err = battle_app_start();
+    const esp_err_t app_err = adventure_app_start();
     if (app_err != ESP_OK) {
         ESP_LOGE(TAG, "应用启动失败: %s", esp_err_to_name(app_err));
         return;

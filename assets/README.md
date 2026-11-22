@@ -4,7 +4,7 @@
 
 # Assets
 
-This directory stores reusable fonts, images, music, sound effects, and battery profiles, organized by asset type.
+This directory stores reusable fonts, images, generated poetry art, poetry audio, and battery profiles, organized by asset type.
 
 Keep each asset in the matching subdirectory and document its destination, naming, integration method, and source/license. Do not mix binary assets with Markdown documentation.
 
@@ -33,13 +33,43 @@ Store reusable source images and generated display assets in `images/`.
 - Preserve editable sources where licensing permits, and record the source and license.
 - Never commit device QR secrets, credentials, or personal data in images.
 
-## Music and sound effects
+## Poetry art
 
-Store reusable music and sound-effect sources in `music/`.
+The adventure scenes and the chibi Ultraman sprites are generated, not hand-drawn
+binaries. [`../tools/build_poetry_art.py`](../tools/build_poetry_art.py) draws the
+three 240 × 320 RGB565 backdrops (spring blossoms, moonlit window, tower and river
+at sunset) and the three 64 × 84 RGB565A8 Ultraman poses (idle, hint, cheer), then
+writes `main/assets/poetry_art.c` and `main/assets/poetry_art.h`.
 
-- Document the source, license, sample rate, bit depth, channels, conversion command, and destination.
-- Prefer 16 kHz, 16-bit mono PCM when it matches the current BSP audio path.
-- Check Flash and internal-RAM cost before embedding audio; stream or chunk long recordings.
+- Re-run the generator after changing composition, palette, or pose geometry; do
+  not edit the generated C by hand.
+- Keep the display contract in `tools/check_assets.py`: three scenes at 240 × 320
+  and three 64 × 84 sprites with exported accessor functions.
+- The generator uses only Pillow and the Python standard library, so it runs
+  offline and adds no runtime dependency to the firmware.
+
+## Poetry audio
+
+Text-to-speech narration and the generated guofeng background music and cues live
+in [`audio/`](audio/). Provenance is documented in
+[`audio/SOURCES.md`](audio/SOURCES.md).
+
+| Path | Content |
+| --- | --- |
+| [`audio/narration/poem_7.wav`](audio/narration/poem_7.wav) | Mandarin narration of *Chunxiao* (Spring Dawn), 16 kHz 16-bit mono PCM. |
+| [`audio/narration/poem_2.wav`](audio/narration/poem_2.wav) | Mandarin narration of *Jingye Si* (Quiet Night Thoughts). |
+| [`audio/narration/poem_16.wav`](audio/narration/poem_16.wav) | Mandarin narration of *Deng Guanque Lou* (Climbing Stork Tower). |
+
+[`../tools/build_poetry_audio.py`](../tools/build_poetry_audio.py) normalizes the
+committed narration recordings, synthesizes the 12.8 s pentatonic background loop
+and the five short cues (move, confirm, correct, wrong, unlock), and writes
+`main/audio/poetry_audio.c` plus `main/audio/poetry_audio.h`.
+
+- Keep the clip budget enforceable: `tools/check_assets.py` caps the embedded
+  poetry audio at 1,200,000 samples so the factory partition still fits.
+- Narration is regenerated with Windows SAPI (`Microsoft Huihui Desktop`, Chinese
+  mainland voice) at rate −2; the committed WAVs are the source of truth so other
+  platforms can rebuild the firmware without SAPI.
 - Do not commit media without redistribution permission.
 
 ## Battery profiles

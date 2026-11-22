@@ -22,6 +22,9 @@ from pathlib import Path
 
 # Standalone verification must not create a tools/__pycache__ as a side effect.
 sys.dont_write_bytecode = True
+# Run both as a script and through embedded Python distributions whose sys.path
+# omits the script directory.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from verify_firmware import FLASH_SIZE, REQUIRED_IMAGES, verify_firmware_layout
 
 

@@ -206,6 +206,7 @@ LICENSE                  仓库许可证
 | [社区作品与经验](/docs/reference/README.zh_CN.md) | `docs/reference/<username>/` 下的应用档案和可复用知识 |
 | [参与贡献](/docs/contribution/README.zh_CN.md) | 文档、提交与 Pull Request 约定 |
 | [品牌素材](/docs/brand/README.zh_CN.md) | 产品视觉参考与[品牌说明](/docs/brand/brand-and-product.zh_CN.md) |
+| [玩法差异](/docs/gameplay-difference.zh_CN.md) · [真机测试用例](/docs/device-test-plan.zh_CN.md) | 与数学匹配游戏的玩法边界，以及真机验收清单 |
 | [Fork 指南](/docs/fork-guide.zh_CN.md) · [更新记录](/docs/CHANGELOG.zh_CN.md) | 下游工作流与版本历史 |
 
 ---

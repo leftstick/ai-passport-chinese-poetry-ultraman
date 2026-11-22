@@ -4,7 +4,7 @@
 
 # 资源目录（Assets）
 
-本目录集中存放可复用的资源（字库、图片、音乐、电池参数等），按资源类型分子目录管理。每个资源放在其类型对应的子目录，并记录放置路径、命名方式、集成方式与来源/许可。二进制资源（字体、图片、音频）不属于纯 markdown 文档，请勿与文档混放。涉及版权/授权的资源需注明来源与许可。
+本目录集中存放可复用的资源（字库、图片、生成的诗词插画、诗词音频、电池参数等），按资源类型分子目录管理。每个资源放在其类型对应的子目录，并记录放置路径、命名方式、集成方式与来源/许可。二进制资源（字体、图片、音频）不属于纯 markdown 文档，请勿与文档混放。涉及版权/授权的资源需注明来源与许可。
 
 ## 字库（fonts）
 
@@ -31,13 +31,38 @@
 - 许可允许时保留可编辑源文件，并记录来源与许可。
 - 图片中不得包含设备二维码秘密、凭证或个人数据。
 
-## 音乐与音效（music）
+## 诗词插画（poetry art）
 
-可复用的音乐与音效源码放在 `music/`。
+冒险场景与 Q 版奥特曼立绘由脚本生成，而不是手工维护的二进制图片。
+[`../tools/build_poetry_art.py`](../tools/build_poetry_art.py) 绘制三张 240 × 320
+RGB565 背景（春日花溪、月夜窗棂、落日楼台），以及三张 64 × 84 RGB565A8
+奥特曼姿态（待机、提示、欢呼），输出 `main/assets/poetry_art.c` 与
+`main/assets/poetry_art.h`。
 
-- 记录来源、许可、采样率、位深、声道、转换命令与目标路径。
-- 与当前 BSP 音频路径匹配时优先采用 16 kHz、16 位单声道 PCM。
-- 嵌入音频前评估 Flash 与内部 RAM 成本；长录音应流式或分块。
+- 修改构图、配色或姿态几何后重新运行生成脚本，不要手改生成的 C 文件。
+- 显示契约由 `tools/check_assets.py` 校验：三张 240 × 320 场景、三张 64 × 84
+  立绘，并导出访问函数。
+- 生成脚本只依赖 Pillow 与 Python 标准库，可离线运行，不给固件增加运行时依赖。
+
+## 诗词音频（audio）
+
+诗词朗读、生成的国风背景音乐与提示音位于 [`audio/`](audio/)，来源与授权说明见
+[`audio/SOURCES.zh_CN.md`](audio/SOURCES.zh_CN.md)。
+
+| 路径 | 内容 |
+| --- | --- |
+| [`audio/narration/poem_7.wav`](audio/narration/poem_7.wav) | 《春晓》普通话朗读（16 kHz、16 位单声道 PCM）。 |
+| [`audio/narration/poem_2.wav`](audio/narration/poem_2.wav) | 《静夜思》普通话朗读。 |
+| [`audio/narration/poem_16.wav`](audio/narration/poem_16.wav) | 《登鹳雀楼》普通话朗读。 |
+
+[`../tools/build_poetry_audio.py`](../tools/build_poetry_audio.py) 对已提交的朗读录音做
+归一化，合成 12.8 秒五声音阶背景循环与五个短提示音（移动、确认、答对、答错、
+解锁），并写入 `main/audio/poetry_audio.c` 与 `main/audio/poetry_audio.h`。
+
+- 保持可校验的容量上限：`tools/check_assets.py` 将嵌入的诗词音频限制在
+  1,200,000 个采样点以内，确保 factory 分区仍能容纳固件。
+- 朗读使用 Windows SAPI（`Microsoft Huihui Desktop` 中国大陆语音，语速 −2）重新生成；
+  已提交的 WAV 是重建依据，其他平台无需 SAPI 即可构建固件。
 - 无再分发许可不提交媒体文件。
 
 ## 电池参数（battery）

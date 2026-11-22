@@ -212,6 +212,7 @@ provide reference material. Choose the entry that matches your task.
 | [Community projects and experience](/docs/reference/README.md) | Playbooks and reusable knowledge under `docs/reference/<username>/` |
 | [Contributing](/docs/contribution/README.md) | Documentation, commits, and pull-request conventions |
 | [Brand assets](/docs/brand/README.md) | Product visual references and [brand language](/docs/brand/brand-and-product.md) |
+| [Gameplay difference](/docs/gameplay-difference.md) · [Device test plan](/docs/device-test-plan.md) | How this application differs from the math matching game, and the on-device acceptance checklist |
 | [Fork guide](/docs/fork-guide.md) · [Changelog](/docs/CHANGELOG.md) | Downstream workflows and release history |
 
 ---

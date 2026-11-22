@@ -85,48 +85,23 @@ run_static_checks() {
         tests/test_poem_question.c main/core/poem_question.c \
         main/assets/poem_library.c -o "${test_dir}/test_poem_question"
     "${test_dir}/test_poem_question"
-    "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core -Imain/assets \
-        tests/test_campaign.c main/core/campaign.c \
-        -o "${test_dir}/test_campaign"
-    "${test_dir}/test_campaign"
-    "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core -Imain/assets \
-        tests/test_review.c main/core/review.c main/core/poem_question.c \
-        main/assets/poem_library.c -o "${test_dir}/test_review"
-    "${test_dir}/test_review"
-    "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core -Imain/assets \
-        tests/test_time_attack.c main/core/time_attack.c \
-        main/core/poem_question.c main/assets/poem_library.c \
-        -o "${test_dir}/test_time_attack"
-    "${test_dir}/test_time_attack"
-    "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core -Imain/assets \
-        tests/test_cycle.c main/core/cycle.c main/core/poem_question.c \
-        main/assets/poem_library.c -o "${test_dir}/test_cycle"
-    "${test_dir}/test_cycle"
-    "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core -Imain/assets \
-        tests/test_battle.c main/core/battle.c main/core/campaign.c \
-        main/core/ultimate.c main/core/beam_rhythm.c \
-        main/core/poem_question.c main/assets/poem_library.c \
-        -o "${test_dir}/test_battle"
-    "${test_dir}/test_battle"
     "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core \
-        tests/test_beam_rhythm.c main/core/beam_rhythm.c \
-        -o "${test_dir}/test_beam_rhythm"
-    "${test_dir}/test_beam_rhythm"
+        tests/test_poem_text.c main/core/poem_text.c \
+        -o "${test_dir}/test_poem_text"
+    "${test_dir}/test_poem_text"
+    "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core -Imain/assets \
+        tests/test_poem_challenge.c main/core/poem_challenge.c \
+        main/core/poem_text.c main/core/poem_question.c \
+        main/assets/poem_library.c -o "${test_dir}/test_poem_challenge"
+    "${test_dir}/test_poem_challenge"
+    "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core -Imain/assets \
+        tests/test_adventure.c main/core/adventure.c main/core/collection.c \
+        -o "${test_dir}/test_adventure"
+    "${test_dir}/test_adventure"
     "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core \
-        tests/test_ultimate.c main/core/ultimate.c \
-        -o "${test_dir}/test_ultimate"
-    "${test_dir}/test_ultimate"
-    "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core \
-        tests/test_progress.c main/core/progress.c \
-        -o "${test_dir}/test_progress"
-    "${test_dir}/test_progress"
-    "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core \
-        tests/test_anim.c main/core/anim.c -o "${test_dir}/test_anim"
-    "${test_dir}/test_anim"
-    "${CC:-cc}" -std=c11 -Wall -Wextra -Werror -Imain/core \
-        tests/test_action.c main/core/action_config.c \
-        -o "${test_dir}/test_action"
-    "${test_dir}/test_action"
+        tests/test_collection.c main/core/collection.c \
+        -o "${test_dir}/test_collection"
+    "${test_dir}/test_collection"
     PYTHONDONTWRITEBYTECODE=1 python3 tests/test_battery_profile.py
     PYTHONDONTWRITEBYTECODE=1 python3 tests/test_deep_sleep_contract.py
     PYTHONDONTWRITEBYTECODE=1 python3 tests/test_key_wake_contract.py
