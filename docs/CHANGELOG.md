@@ -12,6 +12,13 @@
 
 ## Unreleased
 
+## v0.1.0-chinese-poetry-ultraman - 2026-11-22
+
+- Added the "Ultraman Poetry Quest" application for AI-Passport: a three-button, portrait poetry campaign with nine stage planets, critical/ultimate/beam battle flows, time attack, review, collection, coin shop, and cycle progression.
+- Added the "Poem Library of Light" with 82 poems (55 core for grades 1–3 and 27 expansion for grades 4–6), JSON batch import, generated question sets, and validated Chinese font subsets.
+- Reused the BSP and the reference project's screen rendering, sprite drawing, and button framework; replaced the reference card-matching gameplay and demo UI with a new interface designed for the 240×320 portrait screen.
+- Added audio feedback for option movement, confirmation, correct answers (Spacium beam plus a positive cue), and wrong answers (monster growl) using the existing audio cues.
+
 - Added the supplied 80-byte CW2017 profile for the specified 520 mAh cell, including content/update-flag checks, verified writes, the required restart sequence, and bounded SOC-readiness polling.
 
 - Expanded the environment bootstrap document: added Espressif's Git service mirror (`git.espressif.com.cn`) as the preferred mainland-China route for ESP-IDF v5.5.3 and its submodules, documented submodule long-wait/timeout handling, in-place repair, and the pinned-commit shallow fetch for large submodules such as `esp32-wifi-lib`, warned about stale per-repository Jihulab `insteadOf` residue, and added the official offline release archive as a last-resort fallback (learned from `esp-mosaico/esp-mosaico-vibe`).

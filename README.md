@@ -79,7 +79,11 @@
 esptool.py -p <PORT> write_flash 0x0 build/FoloToy-AI-Passport-full.bin
 ```
 
-`build/` 与本地工作记忆 `.ai-memory/` 不纳入版本控制。
+`build/`、本地工作记忆 `.ai-memory/` 与文档快照 `.writing/` 不纳入版本控制。
+
+## 下载
+
+已发布固件见 [GitHub Releases](https://github.com/leftstick/ai-passport-chinese-poetry-ultraman/releases)。下载 `FoloToy-AI-Passport-full.bin`，按上一节的命令从 `0x0` 整片刷写。
 
 ## 目录结构
 
@@ -104,12 +108,12 @@ tools/        素材生成、校验与固件归档脚本
 
 ```text
 Build: PASS
-Host tests: NOT RUN
+Host tests: PASS (GitHub Actions)
 Device tests: NOT RUN
 Unverified: 真机显示、按键手感、音量、长时间稳定性
 ```
 
-构建、合并镜像校验、诗词库、字形清单、字体覆盖、资源与仓库文本检查均通过。主机测试已接入 `tools/validate.sh`，但当前开发机没有主机 C 编译器，只完成了 RISC-V GCC 语法校验，测试断言尚未实际执行，也未进行真机刷写验证。
+构建、合并镜像校验、主机测试、诗词库、字形清单、字体覆盖、资源与仓库文本检查均通过。本机没有主机 C 编译器，主机测试由 GitHub Actions 在 `main` 上实际执行并通过；尚未进行真机刷写验证。
 
 ## 许可与致谢
 
