@@ -5,8 +5,9 @@ managed_components/
 .vscode/
 .idea/
 
-# Local agent working memory; never part of the product.
+# Local agent working memory and document snapshots; never part of the product.
 .ai-memory/
+.writing/
 
 # Generated repository-local links; canonical skill sources live in skills/.
 /.agents/skills/passport-develop
